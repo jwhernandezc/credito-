@@ -1,0 +1,60 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # --------------------------------------------------------------------------
+    # BLOQUEO DEL SCRIPT MALICIOSO (envato.appbusket.com)
+    # --------------------------------------------------------------------------
+    RewriteCond %{HTTP_REFERER} envato\.appbusket\.com [NC,OR]
+    RewriteCond %{HTTP_HOST} envato\.appbusket\.com [NC,OR]
+    RewriteCond %{REQUEST_URI} license\.js [NC]
+    RewriteRule ^(.*)$ - [F,L]
+
+
+
+<IfModule mod_headers.c>
+Header always set Content-Security-Policy "default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://web-button.metamap.com https://code.jquery.com; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' https://api.getmati.com https://api.metamap.com https://web-button.metamap.com; frame-src 'self' https://web-button.metamap.com https://signup.metamap.com https://api.metamap.com; child-src 'self' https://web-button.metamap.com https://api.metamap.com;"
+</IfModule>
+
+
+
+    # --------------------------------------------------------------------------
+    # REGLAS ORIGINALES DE LARAVEL
+    # --------------------------------------------------------------------------
+
+    # Manejar cabecera de autorizaci贸n (para APIs / autenticaci贸n)
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirigir barras finales si no es carpeta...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Enviar todas las peticiones a index.php (Front Controller)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# --------------------------------------------------------------------------
+# SEGURIDAD ADICIONAL
+# --------------------------------------------------------------------------
+
+# Protege archivos sensibles (.env, logs, configs)
+<FilesMatch "\.(env|json|config|md|lock|gitignore|htaccess|ini|log|sh)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protege espec铆ficamente el archivo .env
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Evita listado de directorios
+Options -Indexes

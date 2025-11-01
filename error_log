@@ -1,0 +1,15 @@
+[27-Oct-2025 19:14:46 UTC] PHP Warning:  require(/home/ossagiraldo/public_html/lamoto.co/credito/vendor/autoload.php): Failed to open stream: No such file or directory in /home/ossagiraldo/public_html/lamoto.co/credito/index.php on line 34
+[27-Oct-2025 19:14:46 UTC] PHP Warning:  require(/home/ossagiraldo/public_html/lamoto.co/credito/vendor/autoload.php): Failed to open stream: No such file or directory in /home/ossagiraldo/public_html/lamoto.co/credito/index.php on line 34
+[27-Oct-2025 19:14:46 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/ossagiraldo/public_html/lamoto.co/credito/vendor/autoload.php' (include_path='.:/opt/alt/php84/usr/share/pear:/opt/alt/php84/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ossagiraldo/public_html/lamoto.co/credito/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/ossagiraldo/public_html/lamoto.co/credito/index.php on line 34
+[27-Oct-2025 19:14:49 UTC] PHP Warning:  require(/home/ossagiraldo/public_html/lamoto.co/credito/vendor/autoload.php): Failed to open stream: No such file or directory in /home/ossagiraldo/public_html/lamoto.co/credito/index.php on line 34
+[27-Oct-2025 19:14:49 UTC] PHP Warning:  require(/home/ossagiraldo/public_html/lamoto.co/credito/vendor/autoload.php): Failed to open stream: No such file or directory in /home/ossagiraldo/public_html/lamoto.co/credito/index.php on line 34
+[27-Oct-2025 19:14:49 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/ossagiraldo/public_html/lamoto.co/credito/vendor/autoload.php' (include_path='.:/opt/alt/php84/usr/share/pear:/opt/alt/php84/usr/share/php:/usr/share/pear:/usr/share/php') in /home/ossagiraldo/public_html/lamoto.co/credito/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/ossagiraldo/public_html/lamoto.co/credito/index.php on line 34
+[27-Oct-2025 20:36:20 UTC] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home/ossagiraldo/public_html/lamoto.co/credito/routes/api.php on line 5
+[27-Oct-2025 20:36:24 UTC] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home/ossagiraldo/public_html/lamoto.co/credito/routes/api.php on line 5
+[27-Oct-2025 20:37:03 UTC] PHP Fatal error:  Cannot use Illuminate\Http\Request as Request because the name is already in use in /home/ossagiraldo/public_html/lamoto.co/credito/routes/api.php on line 5

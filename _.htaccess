@@ -1,0 +1,57 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # --------------------------------------------------------------------------
+    # BLOQUEO DEL SCRIPT MALICIOSO (envato.appbusket.com)
+    # --------------------------------------------------------------------------
+    RewriteCond %{HTTP_REFERER} envato\.appbusket\.com [NC,OR]
+    RewriteCond %{HTTP_HOST} envato\.appbusket\.com [NC,OR]
+    RewriteCond %{REQUEST_URI} license\.js [NC]
+    RewriteRule ^(.*)$ - [F,L]
+
+    # Política de seguridad de contenido (CSP)
+    <IfModule mod_headers.c>
+        Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' https://lamoto.co 'unsafe-inline'; object-src 'none';"
+    </IfModule>
+
+    # --------------------------------------------------------------------------
+    # REGLAS ORIGINALES DE LARAVEL
+    # --------------------------------------------------------------------------
+
+    # Manejar cabecera de autorización (para APIs / autenticación)
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirigir barras finales si no es carpeta...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Enviar todas las peticiones a index.php (Front Controller)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# --------------------------------------------------------------------------
+# SEGURIDAD ADICIONAL
+# --------------------------------------------------------------------------
+
+# Protege archivos sensibles (.env, logs, configs)
+<FilesMatch "\.(env|json|config|md|lock|gitignore|htaccess|ini|log|sh)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protege específicamente el archivo .env
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Evita listado de directorios
+Options -Indexes
